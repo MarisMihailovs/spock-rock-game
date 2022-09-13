@@ -26,6 +26,8 @@ const choices = {
   spock: { name: 'Spock', defeats: ['scissors', 'rock'] },
 };
 
+let computerChoice = '';
+
 // reset selected icons
 
 function resetSeleted() {
@@ -34,11 +36,62 @@ function resetSeleted() {
   });
 }
 
+// computer random choice
+function computerRandomChoice() {
+  const computerChoiceNumber = Math.random();
+  if (computerChoiceNumber < 0.2) {
+    computerChoice = 'rock';
+  } else if (computerChoiceNumber <= 0.4) {
+    computerChoice = 'paper';
+  } else if (computerChoiceNumber <= 0.6) {
+    computerChoice = 'scissors';
+  } else if (computerChoiceNumber <= 0.8) {
+    computerChoice = 'lizard';
+  } else {
+    computerChoice = 'spock';
+  }
+}
+
+// call to process the turn
+function checkResult() {
+  resetSeleted();
+  computerRandomChoice();
+  displayComputerChoice();
+}
+
+// add selected styling and computer choice
+function displayComputerChoice() {
+  switch (computerChoice) {
+    case 'rock':
+      computerRock.classList.add('selected');
+      computerChoiceEl.textContent = ' --- Rock';
+      break;
+    case 'paper':
+      computerPaper.classList.add('selected');
+      computerChoiceEl.textContent = ' --- Paper';
+      break;
+    case 'scissors':
+      computerScissors.classList.add('selected');
+      computerChoiceEl.textContent = ' --- Scissors';
+      break;
+    case 'lizard':
+      computerLizard.classList.add('selected');
+      computerChoiceEl.textContent = ' --- Lizard';
+      break;
+    case 'spock':
+      computerSpock.classList.add('selected');
+      computerChoiceEl.textContent = ' --- spock';
+      break;
+    default:
+      break;
+  }
+}
+
 
 // passing player selection value and styling icons
 
 function select(playerChoice) {
-  resetSeleted();
+  checkResult();
   switch (playerChoice) {
     case 'rock':
       playerRock.classList.add('selected');
